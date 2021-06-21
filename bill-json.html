@@ -105,6 +105,7 @@
             <option value="aye">aye</option>
             <option value="abs">abs</option>
             <option value="nay">nay</option>
+            <option value="null">null</option>
         </select><p style="margin-bottom:0px;margin-top:4px;"></p>`
         div.innerHTML += data;
     });
@@ -152,7 +153,12 @@
             d['name'] = item.name
             d['svid'] = item.svid
             d['district'] = item.district
-            d['vote'] = document.getElementById(`${item.name}-vote`).value
+            if (document.getElementById(`${item.name}-vote`).value == "null") {
+              d['vote'] = null
+            }
+            else {  
+              d['vote'] = document.getElementById(`${item.name}-vote`).value
+            }
             data['Votes'].push(d)
         })
         document.getElementById("Output").innerHTML = JSON.stringify(data,null, 2)
